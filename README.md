@@ -33,6 +33,6 @@ The resulting executable will be located in the dist folder.
 
 Caution
 
-This script performs significant system-level changes and should be used with caution. Users should clearly understand the changes it makes to their system and the potential risks involved. Additionally, the function to change the MAC address may not work on all network drivers, as many modern network drivers ignore or block attempts to change the MAC address. Always use such scripts responsibly and ensure that you have taken appropriate backups.
+This script performs significant system-level changes and should be used with caution. Users should clearly understand the changes it makes to their system and the potential risks involved. Additionally, the function to change the MAC address may not work on all network drivers, as many modern network drivers ignore or block attempts to change the MAC address. Always use such scripts responsibly and ensure that you have taken appropriate backups. I AM NOT RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER OR SOFTWARE!
 
 
