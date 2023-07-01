@@ -21,7 +21,7 @@ Option 2 - Manual:
 pip install wmi ctypes
 
 Run the Script: To run the script, navigate to the directory containing the script in your terminal and enter the command: python rinserepeat.py
-   *Note: This script needs to be run with administrator privileges due to the nature of the operations it's performing.
+   <span style="color:red"> *Note: This script needs to be run with administrator privileges due to the nature of the operations it's performing. </span>
 
 Packaging as Executable
 For easier distribution and usage, you can package this script as a standalone executable using PyInstaller:
