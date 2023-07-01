@@ -16,9 +16,9 @@ Option 1 - Download: https://github.com/dsj7419/rinserepeat/releases/tag/v1.2.1
 Option 2 - Manual:
 
 1. **Python Installation**: Ensure that Python is installed on your machine. If not, you can download it from the [official Python website](https://www.python.org/downloads/).
-2. **Install Required Libraries**: The script uses the `wmi` and `ctypes` Python libraries. You can install these libraries using pip:
+2. Install Required Libraries: The script uses the wmi, psutil, and ctypes Python libraries. You can install these libraries using pip:
 
-pip install wmi ctypes
+pip install wmi psutil ctypes
 
 Run the Script: To run the script, navigate to the directory containing the script in your terminal and enter the command: python rinserepeat.py
    *Note: This script needs to be run with administrator privileges due to the nature of the operations it's performing.
@@ -27,12 +27,12 @@ Packaging as Executable
 For easier distribution and usage, you can package this script as a standalone executable using PyInstaller:
 
 pip install pyinstaller
-pyinstaller --onefile rinserepeat.py
+pyinstaller --onefile --noconsole rinserepeat.py
 
 The resulting executable will be located in the dist folder.
 
 Caution
 
-This script performs significant system-level changes and should be used with caution. Users should clearly understand the changes it makes to their system and the potential risks involved. Additionally, the function to change the MAC address may not work on all network drivers, as many modern network drivers ignore or block attempts to change the MAC address. Always use such scripts responsibly and ensure that you have taken appropriate backups. I AM NOT RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER OR SOFTWARE!
+This script performs significant system-level changes and should be used with caution. Users should clearly understand the changes it makes to their system and the potential risks involved. Additionally, the function to change the MAC address may not work on all network drivers, as many modern network drivers ignore or block attempts to change the MAC address. Always use such scripts responsibly and ensure that you have taken appropriate backups. ******I AM NOT RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER OR SOFTWARE!******
 
 
