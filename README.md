@@ -11,6 +11,10 @@ This is a Python script, named `rinserepeat.py`, designed to randomize certain s
 
 ## Usage
 
+Option 1 - Download: https://github.com/dsj7419/rinserepeat/releases/tag/v1.0.0
+
+Option 2 - Manual:
+
 1. **Python Installation**: Ensure that Python is installed on your machine. If not, you can download it from the [official Python website](https://www.python.org/downloads/).
 2. **Install Required Libraries**: The script uses the `wmi` and `ctypes` Python libraries. You can install these libraries using pip:
 
