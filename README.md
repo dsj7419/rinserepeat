@@ -11,7 +11,7 @@ This is a Python script, named `rinserepeat.py`, designed to randomize certain s
 
 ## Usage
 
-Option 1 - Download: https://github.com/dsj7419/rinserepeat/releases/tag/v1.2.1
+Option 1 - https://github.com/dsj7419/rinserepeat/releases/tag/v1.3.0
 
 Option 2 - Manual:
 
