@@ -3,6 +3,7 @@ import string
 import subprocess
 import wmi
 import os
+import ctypes
 import psutil
 from tkinter import messagebox
 from tkinter import Tk, Button, Toplevel, Text
@@ -135,9 +136,9 @@ class RinseRepeat:
 
             results = []
             results.append(self.change_registry_key())
-            results.append(self.change_computer_name())
-            results.append(self.change_mac_address())
-            results.append(self.change_pagefile_size())
+            results.append(self.change_computer_name(new_name))
+            results.append(self.change_mac_address(target_mac))
+            results.append(self.change_pagefile_size(target_size))
 
             summary_window = Toplevel(self.root)
             summary_window.title("Operation Summary")
@@ -165,14 +166,14 @@ class RinseRepeat:
 
             self.cancel_button = Button(summary_window, text="Cancel",
                                         command=lambda: self.cancel_changes(summary_window), bg="red", fg="white")
-            cancel_button.pack(side="right", padx=10, pady=10)
+            self.cancel_button.pack(side="right", padx=10, pady=10)
 
         proceed_button = Button(proceed_window, text="Proceed", command=execute_changes, bg="red", fg="white")
         proceed_button.pack(side="left", padx=10, pady=10)
 
         self.cancel_button = Button(proceed_window, text="Cancel", command=lambda: self.cancel_changes(proceed_window),
                                     bg="red", fg="white")
-        cancel_button.pack(side="right", padx=10, pady=10)
+        self.cancel_button.pack(side="right", padx=10, pady=10)
 
     def change_registry_key(self):
         try:
@@ -182,32 +183,30 @@ class RinseRepeat:
         except Exception as e:
             return f"Registry Key: Delete failed - {str(e)}"
 
-    def change_computer_name(self):
+    def change_computer_name(self, new_name):
         try:
             c = wmi.WMI()
             computer = c.Win32_ComputerSystem()[0]
-            computer.Rename("NewComputerName")  # Replace "NewComputerName" with the desired name
-            return "Computer Name: Changed successfully"
+            computer.Rename(new_name)  # Replace "NewComputerName" with the desired name
+            return f"Computer Name: Changed to {new_name}"
         except Exception as e:
             return f"Computer Name: Change failed - {str(e)}"
 
-    def change_mac_address(self):
+    def change_mac_address(self, target_mac):
         try:
             c = wmi.WMI()
             network_adapters = c.Win32_NetworkAdapterConfiguration(IPEnabled=True)
             for adapter in network_adapters:
                 if adapter.MACAddress:
-                    adapter.MACAddress = "NewMacAddress"  # Replace "NewMacAddress" with the desired MAC address
+                    adapter.MACAddress = target_mac
                     adapter.Put_()
             return "MAC Address: Changed successfully"
         except Exception as e:
             return f"MAC Address: Change failed - {str(e)}"
 
-    def change_pagefile_size(self):
+    def change_pagefile_size(self, target_size):
         try:
             for partition, sizes in self.pagefile_size_original.items():
-                target_size = sizes['target_size']
-
                 # Modify the pagefile size using the 'wmic' command
                 subprocess.run(['wmic', 'pagefileset', 'where', f'name="{partition}\\pagefile.sys"', 'set',
                                 f'InitialSize={target_size}', 'MaximumSize={target_size}'], capture_output=True,
@@ -227,7 +226,9 @@ class RinseRepeat:
             results.append(self.change_mac_address(self.mac_address_original))
 
         if self.pagefile_size_original is not None:
-            results.append(self.change_pagefile_size(self.pagefile_size_original))
+            for partition, sizes in self.pagefile_size_original.items():
+                target_size = sizes['current_size']
+                results.append(self.change_pagefile_size(target_size))
 
         # Update the summary text
         summary_text = self.summary_text
