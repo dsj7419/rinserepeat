@@ -205,10 +205,14 @@ class RinseRepeat:
 
     def change_pagefile_size(self):
         try:
-            # Code to change the pagefile size
-            # Use the self.pagefile_size_original to get the original values
-            # You can use self.pagefile_size_original[partition]['current_size'] to access the current size for each partition
-            # You can use self.pagefile_size_original[partition]['target_size'] to access the target size for each partition
+            for partition, sizes in self.pagefile_size_original.items():
+                target_size = sizes['target_size']
+
+                # Modify the pagefile size using the 'wmic' command
+                subprocess.run(['wmic', 'pagefileset', 'where', f'name="{partition}\\pagefile.sys"', 'set',
+                                f'InitialSize={target_size}', 'MaximumSize={target_size}'], capture_output=True,
+                               text=True, check=True)
+
             return "Pagefile Size: Changed successfully"
         except Exception as e:
             return f"Pagefile Size: Change failed - {str(e)}"
