@@ -27,9 +27,10 @@ class RinseRepeat:
         self.proceed_button = Button(self.analysis_window, text="Proceed", command=self.proceed, bg="red", fg="white")
         self.proceed_button.pack(side="left", padx=10, pady=10)
 
-        self.cancel_button = Button(self.analysis_window, text="Cancel", command=self.cancel_changes, bg="red",
+        self.cancel_button = Button(self.analysis_window, text="Cancel", command=lambda: self.cancel_changes(self.analysis_window), bg="red",
                                     fg="white")
         self.cancel_button.pack(side="right", padx=10, pady=10)
+
 
         # Initialize instance variables to hold original values
         self.registry_key_original = None
@@ -100,6 +101,13 @@ class RinseRepeat:
         self.pagefile_size_original = pagefile_info
         return result
 
+    def cancel_changes(self, window):
+        # Display a confirmation dialog
+        if messagebox.askyesno("Confirmation", "Are you sure you want to cancel?"):
+            # Destroy the window and exit the script
+            window.destroy()
+            os._exit(0)  # Terminate the script immediately
+
     def analyze_system(self):
         analysis_results = []
 
@@ -109,13 +117,6 @@ class RinseRepeat:
         analysis_results.append(self.check_pagefile_size())
 
         return analysis_results
-
-    def cancel_changes(self, window):
-        # Display a confirmation dialog
-        if messagebox.askyesno("Confirmation", "Are you sure you want to cancel?"):
-            # Destroy the window and exit the script
-            window.destroy()
-            os._exit(0)  # Terminate the script immediately
 
     def proceed(self):
         self.analysis_window.destroy()
