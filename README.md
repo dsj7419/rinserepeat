@@ -18,7 +18,7 @@ Option 2 - Manual:
 1. **Python Installation**: Ensure that Python is installed on your machine. If not, you can download it from the [official Python website](https://www.python.org/downloads/).
 2. Install Required Libraries: The script uses the wmi, psutil, and ctypes Python libraries. You can install these libraries using pip:
 
-pip install wmi psutil ctypes
+*pip install wmi psutil ctypes*
 
 Run the Script: To run the script, navigate to the directory containing the script in your terminal and enter the command: python rinserepeat.py
    *Note: This script needs to be run with administrator privileges due to the nature of the operations it's performing.
@@ -26,8 +26,11 @@ Run the Script: To run the script, navigate to the directory containing the scri
 Packaging as Executable
 For easier distribution and usage, you can package this script as a standalone executable using PyInstaller:
 
-pip install pyinstaller
-pyinstaller --onefile --noconsole rinserepeat.py
+*pip install pyinstaller*
+
+Then type:
+
+*pyinstaller --onefile --noconsole rinserepeat.py*
 
 The resulting executable will be located in the dist folder.
 
